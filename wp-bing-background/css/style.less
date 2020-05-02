@@ -1,0 +1,18 @@
+body{
+	background:url(@background-url);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	background-size: cover;
+	
+	backdrop-filter: blur(@blur) brightness(@brightness) grayscale(@grayscale) hue-rotate(@hue-rotate) invert(@invert) ~'saturate('@saturate~')' sepia(@sepia) opacity(@opacity);
+    
+    -webkit-backdrop-filter: blur(@blur) brightness(@brightness) grayscale(@grayscale) hue-rotate(@hue-rotate) invert(@invert) ~'saturate('@saturate~')' sepia(@sepia) opacity(@opacity);
+    
+    -moz-backdrop-filter: blur(@blur) brightness(@brightness) grayscale(@grayscale) hue-rotate(@hue-rotate) invert(@invert) ~'saturate('@saturate~')' sepia(@sepia) opacity(@opacity);
+    
+    -ms-backdrop-filter: blur(@blur) brightness(@brightness) grayscale(@grayscale) hue-rotate(@hue-rotate) invert(@invert) ~'saturate('@saturate~')' sepia(@sepia) opacity(@opacity);
+    
+    -o-backdrop-filter: blur(@blur) brightness(@brightness) grayscale(@grayscale) hue-rotate(@hue-rotate) invert(@invert) ~'saturate('@saturate~')' sepia(@sepia) opacity(@opacity);
+    
+}

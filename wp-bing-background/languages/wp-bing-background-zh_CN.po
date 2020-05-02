@@ -1,0 +1,162 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Bing HP Image Archive\n"
+"POT-Creation-Date: 2020-04-28 17:16+0800\n"
+"PO-Revision-Date: 2020-05-01 15:21+0800\n"
+"Last-Translator: Joytou Wu <joytou.wu@qq.com>\n"
+"Language-Team: Joytou Wu <joytou.wu@qq.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: wp-bing-background.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: wp-bing-background.php:148
+msgid "Setting has updated"
+msgstr "设置已保存"
+
+#: wp-bing-background.php:411
+msgid "Save"
+msgstr "保存"
+
+#: wp-bing-background.php:395 wp-bing-background.php:423
+msgid "WP Bing Background Setting"
+msgstr "WP Bing Background 设置"
+
+#. Plugin Name of the plugin/theme
+#: wp-bing-background.php:149
+msgid "WP Bing Background"
+msgstr "WP Bing Background"
+
+#: wp-bing-background.php:152
+msgid "Interface Domain Name"
+msgstr "必应域名接口"
+
+#: wp-bing-background.php:155
+msgid ""
+"Bing domain name interface address. It is not recommended to modify it "
+"casually"
+msgstr "必应域名接口地址。不推荐随便修改"
+
+#: wp-bing-background.php:158
+msgid "Opacity"
+msgstr "透明度"
+
+#: wp-bing-background.php:164
+msgid ""
+"Opacity of background, the smaller, the more transparent. The minimum is 0 "
+"and the maximum is 1"
+msgstr "背景透明度。值越小越透明。最小为0，最大为1"
+
+#: wp-bing-background.php:167
+msgid "Blur"
+msgstr "高斯模糊度"
+
+#: wp-bing-background.php:173
+msgid ""
+"Blur of background. The bigger the blur. The minimum is 0 and the maximum is "
+"200"
+msgstr "背景高斯模糊度。值越大越模糊。最小为0，最大为200"
+
+#: wp-bing-background.php:176
+msgid "Brightness"
+msgstr "明亮度"
+
+#: wp-bing-background.php:182
+msgid ""
+"Brightness of background. The bigger, the brighter. The minimum is 0 and the "
+"maximum is 200"
+msgstr "背景明亮度。值越大越明亮。最小为0，最大为200"
+
+#: wp-bing-background.php:185
+msgid "Contrast"
+msgstr "对比度"
+
+#: wp-bing-background.php:191
+msgid "Contrastion of background. The minimum is 0 and the maximum is 200"
+msgstr "背景对比度。最小为0，最大为200"
+
+#: wp-bing-background.php:194
+msgid "Grayscale"
+msgstr "灰度"
+
+#: wp-bing-background.php:200
+msgid ""
+"Grayscale of background. The larger the value, the more gray it appears. The "
+"minimum is 0 and the maximum is 100"
+msgstr "背景灰度。值越大越呈现灰色。最小为0，最大为100"
+
+#: wp-bing-background.php:203
+msgid "Hue Rotate"
+msgstr "色调反转"
+
+#: wp-bing-background.php:209
+msgid "Hue rotation to background. The minimum is 0 and the maximum is 360"
+msgstr "背景色掉反转。最小为0，最大为360"
+
+#: wp-bing-background.php:212
+msgid "Invert"
+msgstr "反转图像"
+
+#: wp-bing-background.php:218
+msgid "Invertion of background. The minimum is 0 and the maximum is 100"
+msgstr "背景色彩反转度。最小为0，最大为100"
+
+#: wp-bing-background.php:221
+msgid "Saturate"
+msgstr "饱和度"
+
+#: wp-bing-background.php:227
+msgid ""
+"Saturation of background. The higher the value, the higher the saturation. "
+"The minimum is 0 and the maximum is 200"
+msgstr "背景饱和度。值越大越饱和。最小为0，最大为200"
+
+#: wp-bing-background.php:230
+msgid "Sepia"
+msgstr "深褐色度"
+
+#: wp-bing-background.php:236
+msgid ""
+"Sepia of background. The bigger, the darker brown. The minimum is 0 and the "
+"maximum is 100"
+msgstr "背景深褐色度。值越大越呈现褐色。最小为0，最大为100"
+
+#: wp-bing-background.php:239
+msgid "Compression Proportion"
+msgstr "压缩比例"
+
+#: wp-bing-background.php:245
+msgid ""
+"Compression ratio of background. The smaller the scale, the smaller the "
+"storage space of the background picture, and of course the picture will be "
+"blurred when displayed. The minimum is 0.1 and the maximum is 1"
+msgstr ""
+"背景压缩比例。值越小，图片占用的存储空间就越小，当然，随之而来的的图片也会越"
+"模糊不清。最小为0.1，最大为1"
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "http://www.xn--irr040d121a.cn/"
+msgstr "http://www.xn--irr040d121a.cn/"
+
+#. Description of the plugin/theme
+msgid ""
+"Change the wordpress's background to the image which provided by <a href="
+"\"https://www.bing.com/\">Bing</a>."
+msgstr ""
+"改变WordPress的背景为<a href=\"https://www.bing.com/\">必应</a>每日图片."
+
+#. Author of the plugin/theme
+msgid "Joytou Wu"
+msgstr "Joytou Wu"
