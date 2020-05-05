@@ -386,8 +386,6 @@ class wp_bing_background {
                 }
                 closedir( $dh );
             }
-            //$content = file_get_contents( self::get_image_url() );
-            //file_put_contents( $bingDir . DIRECTORY_SEPARATOR . $today . '-default.jpg', $content ); // 写入今天的
             
             $source = self::get_image_url();
             $distance = $bingDir . DIRECTORY_SEPARATOR . $today . '.jpg';
@@ -482,39 +480,6 @@ class wp_bing_background {
         fwrite( $style_css_file, $ouputString );
         fclose( $style_css_file );
         return true;
-        /*if( !file_exists( $inputFile ) ){
-            if( ($style_less_file = fopen( $inputFile, 'r' )) !== false ){
-                while( !feof( $style_less_file ) ){
-                    $inputString .= fgetc( $style_less_file );
-                }
-                fclose( $style_less_file );
-                
-                $ouputString = $lessc->compile( $inputString );
-                
-                $style_css_file = fopen( $outputFile, 'w' );
-                fwrite( $style_css_file, $ouputString );
-                fclose( $style_css_file );
-            }else{
-                //Alert if can not open the file.
-                self::add_settings_error(
-                    'myUniqueIdentifyer',
-                    esc_attr('settings_error'),
-                    sprintf( __( 'Unable to open the file <strong>%s</strong>', 'wp-bing-background' ), $inputFile ), 
-                    'error'
-                );
-            }
-        }else{
-            //Alert if the file does not exist.
-            self::add_settings_error(
-                'myUniqueIdentifyer',
-                esc_attr('settings_error'), 
-                sprintf( 
-                    __('File <strong>%s</strong> does not exist', 'wp-bing-background'), 
-                    $inputFile 
-                ),
-                'error'
-            );
-        }*/
     }
     
     /**
