@@ -145,6 +145,16 @@ msgid ""
 "The minimum is 0.1 and the maximum is 1"
 msgstr ""
 
+#: wp-bing-background.php:446
+msgid ""
+"File <strong>%s</strong> does not exist"
+msgstr ""
+
+#: wp-bing-background.php:447
+msgid ""
+"Unable to open the file <strong>%s</strong>"
+msgstr ""
+
 #. Plugin URI of the plugin/theme
 #. Author URI of the plugin/theme
 msgid "http://www.xn--irr040d121a.cn/"

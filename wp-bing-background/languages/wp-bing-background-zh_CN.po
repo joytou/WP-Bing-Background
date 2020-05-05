@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bing HP Image Archive\n"
 "POT-Creation-Date: 2020-04-28 17:16+0800\n"
-"PO-Revision-Date: 2020-05-01 15:21+0800\n"
+"PO-Revision-Date: 2020-05-05 16:13+0800\n"
 "Last-Translator: Joytou Wu <joytou.wu@qq.com>\n"
 "Language-Team: Joytou Wu <joytou.wu@qq.com>\n"
 "Language: zh_CN\n"
@@ -144,6 +144,14 @@ msgid ""
 msgstr ""
 "背景压缩比例。值越小，图片占用的存储空间就越小，当然，随之而来的的图片也会越"
 "模糊不清。最小为0.1，最大为1"
+
+#: wp-bing-background.php:446
+msgid "File <strong>%s</strong> does not exist"
+msgstr "文件<strong>%s</strong>不存在"
+
+#: wp-bing-background.php:447
+msgid "Unable to open the file <strong>%s</strong>"
+msgstr "无法打开文件<strong>%s</strong>"
 
 #. Plugin URI of the plugin/theme
 #. Author URI of the plugin/theme

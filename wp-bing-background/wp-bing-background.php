@@ -255,14 +255,14 @@ class wp_bing_background {
             
             unset( $bing_hp_image_archive_plugin_options );
             
-            self::complie_less_to_css();
-            
-            self::add_settings_error(
-                'myUniqueIdentifyer', 
-                esc_attr('settings_updated'), 
-                esc_html__('Setting has updated', 'wp-bing-background'),
-                'updated'
-            );
+            if( self::complie_less_to_css() ){
+                self::add_settings_error(
+                    'myUniqueIdentifyer', 
+                    esc_attr('settings_updated'), 
+                    esc_html__('Setting has updated', 'wp-bing-background'),
+                    'updated'
+                );
+            }
         }
         
         //初始化配置
@@ -356,7 +356,10 @@ class wp_bing_background {
      */
     static function get_image_url(){
         $domain = 'https://www.bing.com';
-        return $domain . json_decode( file_get_contents( $domain . '/HPImageArchive.aspx?format=js&cc=zh&idx=0&n=1'), true )['images'][0]['url'];
+        $response =  wp_remote_get( $domain . '/HPImageArchive.aspx?format=js&cc=zh&idx=0&n=1' );
+        if( wp_remote_retrieve_response_code($response) === 200 ){
+            return $domain. json_decode( wp_remote_retrieve_body($response), true )['images'][0]['url'];
+        }
     }
     
     /**
@@ -402,6 +405,7 @@ class wp_bing_background {
     /**
      * Complier for cascading style sheets.
      * @static
+     * @return Boolean Is it can complie the less to css successfully.
      * @author Joytou Wu <joytou.wu@qq.com>
      * @since 1.0.0
      */
@@ -434,11 +438,83 @@ class wp_bing_background {
         
         $lessc = new lessc();
         $lessc->setVariables( $less );
-        $inputFile = plugin_dir_url( __FILE__ ) . 'css' . DIRECTORY_SEPARATOR . 'style.less';
-        $outputFile = __DIR__ . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'style.css';
-        $inputString = file_get_contents( $inputFile );
+        
+        $inputFile = plugin_dir_path( __FILE__ ) . 'css' . DIRECTORY_SEPARATOR . 'style.less';
+        $outputFile = wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . 'bing' . DIRECTORY_SEPARATOR . 'style.css';
+        
+        $inputString = '';
+        
+        if( !file_exists( $inputFile ) ) {
+            self::add_settings_error(
+                'myUniqueIdentifyer',
+                esc_attr( 'settings_error' ),
+                sprintf(
+                    __('File <strong>%s</strong> does not exist', 'wp-bing-background'),
+                    $inputFile
+                    ),
+                'error'
+            );
+            return false;
+        }
+        
+        $style_less_file = fopen( $inputFile, 'r' );
+        
+        if( !$style_less_file ){
+            self::add_settings_error(
+                'myUniqueIdentifyer',
+                esc_attr( 'settings_error' ),
+                sprintf( 
+                    __( 'Unable to open the file <strong>%s</strong>', 'wp-bing-background' ), 
+                    $inputFile 
+                ),
+                'error'
+                );
+        }
+        
+        while( !feof( $style_less_file ) ){
+            $inputString .= fgetc( $style_less_file );
+        }
+        fclose( $style_less_file );
+        
         $ouputString = $lessc->compile( $inputString );
-        file_put_contents( $outputFile, $ouputString );
+        
+        $style_css_file = fopen( $outputFile, 'w' );
+        fwrite( $style_css_file, $ouputString );
+        fclose( $style_css_file );
+        return true;
+        /*if( !file_exists( $inputFile ) ){
+            if( ($style_less_file = fopen( $inputFile, 'r' )) !== false ){
+                while( !feof( $style_less_file ) ){
+                    $inputString .= fgetc( $style_less_file );
+                }
+                fclose( $style_less_file );
+                
+                $ouputString = $lessc->compile( $inputString );
+                
+                $style_css_file = fopen( $outputFile, 'w' );
+                fwrite( $style_css_file, $ouputString );
+                fclose( $style_css_file );
+            }else{
+                //Alert if can not open the file.
+                self::add_settings_error(
+                    'myUniqueIdentifyer',
+                    esc_attr('settings_error'),
+                    sprintf( __( 'Unable to open the file <strong>%s</strong>', 'wp-bing-background' ), $inputFile ), 
+                    'error'
+                );
+            }
+        }else{
+            //Alert if the file does not exist.
+            self::add_settings_error(
+                'myUniqueIdentifyer',
+                esc_attr('settings_error'), 
+                sprintf( 
+                    __('File <strong>%s</strong> does not exist', 'wp-bing-background'), 
+                    $inputFile 
+                ),
+                'error'
+            );
+        }*/
     }
     
     /**
@@ -449,7 +525,7 @@ class wp_bing_background {
      */
     static function load_css(){
         //此处为加载css文件，不能把'/'改为DIRECTORY_SEPARATOR，下同
-        wp_enqueue_style( 'wp-bing-background-style', plugin_dir_url( __FILE__ ) . 'css/style.css' );
+        wp_enqueue_style( 'wp-bing-background-style', wp_upload_dir()['baseurl'] . '/' . 'bing' . '/' . 'style.css' );
     }
     
     /**
@@ -574,8 +650,10 @@ class wp_bing_background {
         foreach($args['attrs'] as $k=>$v){
             $key_value_binding .= " " . esc_attr( $k ) . "=\"" . esc_attr( $v ) . "\"";
         }
+        
         $options = get_option( self::OPTION_NAME );
         echo "<input id=\"wp_bing_background_". esc_attr( $args['id'] ) ."\" name=\"" . esc_attr( self::OPTION_NAME ) . "[". esc_attr( $args['id'] ) ."]\" type=\"". ( $args['type'] ? esc_attr( $args['type'] ) : 'text' ) ."\" value=\"" . ( isset( $options[$args['id']] ) ? esc_attr( $options[$args['id']] ) : esc_attr( $args['default_value'] ) ) . "\" aria-describedby=\"" . esc_attr( $args['id'] ) . "-description\"" . $key_value_binding . "/>";
+    	
     	if(isset( $args['type'] ) && esc_attr( $args['type'] ) === 'range' ){
     	    echo "<span id=\"wp_bing_background_" . esc_attr( $args['id'] ) ."-value\">" . ( isset( $options[$args['id']] ) ? esc_html( $options[$args['id']] ) : esc_html( $args['default_value'] ) ) . "</span>";
     	}
@@ -590,7 +668,6 @@ class wp_bing_background {
     }
     
 }
-
 
 register_activation_hook( __FILE__, array( 'wp_bing_background', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'wp_bing_background', 'deactivate' ) );
