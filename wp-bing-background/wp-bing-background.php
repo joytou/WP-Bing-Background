@@ -371,7 +371,7 @@ class wp_bing_background {
     static function cache_image(){
         // 获取 wp 路径
         $imgDir = wp_upload_dir();
-        $bingDir = $imgDir['basedir'] . DIRECTORY_SEPARATOR . 'bing';
+        $bingDir = $imgDir['basedir'] . DIRECTORY_SEPARATOR . 'bing' . DIRECTORY_SEPARATOR . 'images';
         if ( !file_exists( $bingDir ) ) {
             mkdir( $bingDir, 0755 );
         }
@@ -392,10 +392,10 @@ class wp_bing_background {
             $precent = get_option( self::OPTION_NAME )['compression_proportion'];
             $content = (new imgcompress( $source, $precent ))->compressImg( $distance );
             
-            $src = $imgDir['baseurl'] . '/bing/' . $today . '.jpg';
+            $src = $imgDir['baseurl'] . '/bing/images/' . $today . '.jpg';
         } else {
             // 存在
-            $src = $imgDir['baseurl'] . '/bing/' . $today . '.jpg';
+            $src = $imgDir['baseurl'] . '/bing/images/' . $today . '.jpg';
         }
         return $src;//此处返回url地址，$src不能把'/'更改为DIRECTORY_SEPARATOR
     } 
@@ -437,8 +437,14 @@ class wp_bing_background {
         $lessc = new lessc();
         $lessc->setVariables( $less );
         
+        $bingDir = wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . 'bing' . DIRECTORY_SEPARATOR . 'css';
+        
         $inputFile = plugin_dir_path( __FILE__ ) . 'css' . DIRECTORY_SEPARATOR . 'style.less';
-        $outputFile = wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . 'bing' . DIRECTORY_SEPARATOR . 'style.css';
+        $outputFile = $bingDir . DIRECTORY_SEPARATOR .'style.css';
+        
+        if ( !file_exists( $bingDir ) ) {
+            mkdir( $bingDir, 0755 );
+        }
         
         $inputString = '';
         
@@ -490,7 +496,7 @@ class wp_bing_background {
      */
     static function load_css(){
         //此处为加载css文件，不能把'/'改为DIRECTORY_SEPARATOR，下同
-        wp_enqueue_style( 'wp-bing-background-style', wp_upload_dir()['baseurl'] . '/' . 'bing' . '/' . 'style.css' );
+        wp_enqueue_style( 'wp-bing-background-style', wp_upload_dir()['baseurl'] . '/' . 'bing' . '/' . 'css' . '/' . 'style.css' );
     }
     
     /**
