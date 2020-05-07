@@ -1,10 +1,9 @@
 === WP Bing Background ===
-Contributors: joytou, bing
-Donate link: http://www.xn--irr040d121a.cn/
+Contributors: joytou
 Tags: bing, image, background, wordpress
-Requires at least: 5.2
-Tested up to: 3.4
-Stable tag: 4.3
+Requires at least: 5.0
+Tested up to: 5.4
+Stable tag: 1.0
 Requires PHP: 5.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

@@ -7,7 +7,7 @@
  * Plugin Name: WP Bing Background
  * Description: Change the wordpress's background to the image which provided by <a href="https://www.bing.com/">Bing</a>.
  * Version: 1.0.0
- * Requires at least: 5.2
+ * Requires at least: 5.0
  * Requires PHP: 5.4
  * Author: Joytou Wu
  * Author URI: http://www.xn--irr040d121a.cn/
