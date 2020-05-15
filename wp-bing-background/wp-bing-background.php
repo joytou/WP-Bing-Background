@@ -6,7 +6,7 @@
 /**
  * Plugin Name: WP Bing Background
  * Description: Change the wordpress's background to the image which provided by <a href="https://www.bing.com/">Bing</a>.
- * Version: 1.0.0
+ * Version: 1.1.2
  * Requires at least: 5.0
  * Requires PHP: 5.4
  * Author: Joytou Wu
@@ -353,10 +353,35 @@ class wp_bing_background {
      * @static
      * @author Joytou Wu <joytou.wu@qq.com>
      * @since 1.0.0
+     * Show the error message if can not rich the bing.
+     * @author Joytou Wu <joytou.wu@qq.com>
+     * @since 1.1.2
      */
     static function get_image_url(){
+    	$response_header = array(
+ 			'method' => 'GET',
+ 			'user-agent' => $_SERVER['HTTP_USER_AGENT'],
+ 			'header' => array(
+ 				'Content-Type' => 'application/json;charset=UTF-8',
+ 			),
+ 		);
         $domain = 'https://www.bing.com';
         $response =  wp_remote_get( $domain . '/HPImageArchive.aspx?format=js&cc=zh&idx=0&n=1' );
+        if($response->has_errors()){
+        	foreach($response->get_error_codes() as $k=>$v){
+        		self::add_settings_error(
+                	'myUniqueIdentifyer',
+                	esc_attr( 'settings_error' ),
+                	sprintf(
+                		'WP Bing Background Error: %s (%s)',
+                		$v,
+                		$response->get_error_messages()[$k]
+                	),
+                	'error'
+            	);
+        	}
+            return false;
+        }
         if( wp_remote_retrieve_response_code($response) === 200 ){
             return $domain. json_decode( wp_remote_retrieve_body($response), true )['images'][0]['url'];
         }
@@ -367,7 +392,15 @@ class wp_bing_background {
      * @static
      * @author Joytou Wu <joytou.wu@qq.com>
      * @since 1.0.0
-     */
+     * 
+	 * Detect if support some function from GD library, which used in imgcompress Class.
+	 * If not, just storage image with original data.
+	 * @since 1.1.1
+	 * @author Joytou Wu <joytou.wu@qq.com>
+	 * Show the error message if get_img_url() return empty, or cannot rich bing.
+     * @author Joytou Wu <joytou.wu@qq.com>
+     * @since 1.1.2
+	 */
     static function cache_image(){
         // 获取 wp 路径
         $imgDir = wp_upload_dir();
@@ -389,14 +422,37 @@ class wp_bing_background {
             
             $source = self::get_image_url();
             $distance = $bingDir . DIRECTORY_SEPARATOR . $today . '.jpg';
-            $precent = get_option( self::OPTION_NAME )['compression_proportion'];
-            $content = (new imgcompress( $source, $precent ))->compressImg( $distance );
-            
-            $src = $imgDir['baseurl'] . '/bing/images/' . $today . '.jpg';
-        } else {
-            // 存在
-            $src = $imgDir['baseurl'] . '/bing/images/' . $today . '.jpg';
+            if( function_exists( 'getimagesize' ) &&
+            	function_exists( 'imagedestroy' ) &&
+            	function_exists( 'imagecreatefrom' )
+            ) {
+           		$precent = get_option( self::OPTION_NAME )[ 'compression_proportion' ];
+            	$content = ( new imgcompress( $source, $precent ) )->compressImg( $distance );
+            } else {
+            	$response =  wp_remote_get( $source );
+            	if($response->has_errors()){
+        			foreach($response->get_error_codes() as $k=>$v){
+        				self::add_settings_error(
+                			'myUniqueIdentifyer',
+                			esc_attr( 'settings_error' ),
+                			sprintf(
+                				'WP Bing Background Error: %s (%s)',
+                				$v,
+                				$response->get_error_messages()[$k]
+                			),
+                			'error'
+            			);
+        			}
+            		return false;
+        		}
+        		if( wp_remote_retrieve_response_code($response) === 200 ) {
+            		$file_distance = fopen( $distance, 'w' );
+        			fwrite( $file_distance, wp_remote_retrieve_body ( $response ) );
+        			fclose( $file_distance );
+        		}
+            }
         }
+        $src = $imgDir['baseurl'] . '/bing/images/' . $today . '.jpg';
         return $src;//此处返回url地址，$src不能把'/'更改为DIRECTORY_SEPARATOR
     } 
     

@@ -3,7 +3,7 @@ Contributors: joytou
 Tags: bing, image, background, wordpress
 Requires at least: 5.0
 Tested up to: 5.4
-Stable tag: 1.0
+Stable tag: 1.1
 Requires PHP: 5.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -30,6 +30,12 @@ Change your wordpress's background to the image which provided by <a href="http:
 4. Please ensure that you do not use any cache, because once you use the cache, what you get will always be the result of the cache unless you clear the cache to ensure that it can get the latest static resource files.
 5. If all the above methods cannot solve your problem, please contact me through email <joytou.wu@qq.com > to help you solve the problem in a timely manner.
 
+= Why does it show the error message that 'http_request_failed (cURL error 7: )' =
+
+1. Please check if your host closed the curl function.
+2. Please check whether your hosts can connect properly and visit other websites.
+3. As I known, some hosts are now blocked by Bing, due to these was(were) attacking on Bing in the past or doing something unfriendly to Bing.
+
 == Screenshots ==
 
 1. Plugin setting screen
@@ -38,6 +44,10 @@ Change your wordpress's background to the image which provided by <a href="http:
 4. The final effect of the plugin is on the mobile side.
 
 == Changelog ==
+
+= 1.1.1 =
+* Fixed that was reported error directly with no message because GD library is not supported.
+* Add the Warning that return the error message if the plugin can not service normally.
 
 = 1.0.0 =
 * The first version.
