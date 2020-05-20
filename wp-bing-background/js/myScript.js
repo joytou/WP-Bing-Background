@@ -13,6 +13,8 @@
 	[ ...document.querySelectorAll( "input[type=range]" ) ].map( ( item ) => {
 		item.addEventListener( "mouseover", startTimerForRange );
 		item.addEventListener( "mouseout", stopTimerForRange );
+		item.addEventListener( "touchstart", startTimerForRange );
+		item.addEventListener( "touchend", stopTimerForRange );
 	});
 	function startTimerForRange( e ) {
 		timer = setInterval( () => { timerForRange( e.target.id ) }, 0.01 );

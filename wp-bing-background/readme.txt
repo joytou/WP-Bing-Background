@@ -45,8 +45,11 @@ Change your wordpress's background to the image which provided by <a href="http:
 
 == Changelog ==
 
-= 1.1.1 =
+= 1.1.4 =
+* Fixed that some translations did not display.
+* Fixed that could not change the display value when slide the range on the mobile.
 * Fixed that was reported error directly with no message because GD library is not supported.
+* Add the function that user-defined the location of the saved directory for the plugin static files.
 * Add the Warning that return the error message if the plugin can not service normally.
 
 = 1.0.0 =

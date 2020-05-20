@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Bing HP Image Archive\n"
+"Project-Id-Version: WP Bing Background\n"
 "POT-Creation-Date: 2020-04-28 17:16+0800\n"
-"PO-Revision-Date: 2020-05-05 16:13+0800\n"
+"PO-Revision-Date: 2020-05-20 12:53+0800\n"
 "Last-Translator: Joytou Wu <joytou.wu@qq.com>\n"
 "Language-Team: Joytou Wu <joytou.wu@qq.com>\n"
 "Language: zh_CN\n"
@@ -37,6 +37,19 @@ msgstr "WP Bing Background 设置"
 #: wp-bing-background.php:149
 msgid "WP Bing Background"
 msgstr "WP Bing Background"
+
+#: wp-bing-background.php:150
+msgid "Save Directory"
+msgstr "保存文件夹"
+
+#: wp-bing-background.php:151
+msgid ""
+"About the directory name of the static files that are automatically "
+"generated in this plugin to be saved to the upload folder. "
+"For example: The value is 'bing', then the files will be saved "
+"in '/wp-content/uploads/bing/'"
+msgstr "此插件所生成的静态文件保存在上传文件夹的子文件夹名称。例如："
+"您填写的值为'bing'，则这些文件将保存在'/wp-content/uploads/bing/'"
 
 #: wp-bing-background.php:152
 msgid "Interface Domain Name"
@@ -163,8 +176,111 @@ msgid ""
 "Change the wordpress's background to the image which provided by <a href="
 "\"https://www.bing.com/\">Bing</a>."
 msgstr ""
-"改变WordPress的背景为<a href=\"https://www.bing.com/\">必应</a>每日图片."
+"把WordPress的背景更改为<a href=\"https://www.bing.com/\">必应</a>每日图片."
 
 #. Author of the plugin/theme
 msgid "Joytou Wu"
 msgstr "Joytou Wu"
+
+#. Short description.
+msgid "Change your wordpress&#039;s background to the image which provided by bing."
+msgstr "将您的WordPress的背景修改为必应每日美图"
+
+#. Found in faq list item.
+msgid "If all the above methods cannot solve your problem, please contact me through email &lt;joytou.wu@qq.com &gt; to help you solve the problem in a timely manner."
+msgstr "如果以上的办法都还不能解决您的问题，请立即通过电子邮箱&lt;joytou.wu@qq.com&gt;与我联系，以便帮您解决问题"
+
+#. Found in faq list item.
+msgid "Please ensure that you do not use any cache, because once you use the cache, what you get will always be the result of the cache unless you clear the cache to ensure that it can get the latest static resource files."
+msgstr "请确保您未使用任何缓存，因为一旦您使用了缓存，您将会一直看到缓存后的内容。除非您清除掉所有的缓存，才能看到最新的内容"
+
+#. Found in faq list item.
+msgid "Please check whether the directory 'wp-content -&gt; uploads -&gt; bing' exists, whether there were any files in it, and whether that files can be opened and read normally. If it is broken, please delete it and refresh your website again."
+msgstr "请确保文件夹 'wp-content -&gt; uploads -&gt; bing' 有存在，并且里面有文件，以及里面的文件都能否正常打开。如果任何一个文件提示已损坏，请删除掉相关文件，然后刷新您的网站试试"
+
+#. Found in faq list item.
+msgid "Please try several more times to save the settings of this plugin so that it can regenerate the required static resource files."
+msgstr "请多尝试几遍保存此插件的设置，以便系统能够自动生成所需要的静态文件"
+
+#. Found in faq list item.
+msgid "Please make sure that the domain name in the 'Interface Domain Name' column is Bing's official domain name. As stated in the description, don't modify it casually unless it doesn't work or it makes you feel unsatisfactory."
+msgstr "请确保“必应域名接口”里的必应域名没有修改过。除非插件不能正常运行，否则不要随便修改。"
+
+#. Found in faq header.
+msgid "Why does the background not show the image?"
+msgstr "为什么背景没有显示图片出来？"
+
+#. Found in faq list item.
+msgid "Please check if your host closed the curl function."
+msgstr "请确保您的主机没有停用curl功能。"
+
+#. Found in faq list item.
+msgid "Please check whether your hosts can connect properly and visit other websites."
+msgstr "请检查您的主机能否正常连接和访问外部网络。"
+
+#. Found in faq list item.
+msgid "As I known, some hosts are now blocked by Bing, due to these was(were) attacking on Bing in the past or doing something unfriendly to Bing."
+msgstr "据我所知，部分主机由于一些特殊原因，被必应屏蔽了。"
+
+#. Found in faq header.
+msgid "Why does it show the error message that 'http_request_failed (cURL error 7: )'"
+msgstr "为什么我的网站会提示“http_request_failed (cURL error 7: )”"
+
+#. Found in installation list item.
+msgid "Use the Settings-&gt;WP Bing Bakground screen to configure the plugin"
+msgstr "进入Settings-&gt;WP Bing Bakground配置插件"
+
+#. Found in installation list item.
+msgid "Activate the plugin through the 'Plugins' screen in WordPress"
+msgstr "通过“插件”启用插件"
+
+#. Found in installation list item.
+msgid "Upload the plugin files to the <code>/wp-content/plugins/wp-bing-background</code> directory, or install the plugin through the WordPress plugins screen directly."
+msgstr "上传插件的文件到目录<code>/wp-content/plugins/wp-bing-background</code>，或者通过WordPress插件直接安装"
+
+#. Found in description paragraph.
+msgid "Change your wordpress's background to the image which provided by <a href=\"http://www.bing.com/\">bing</a>."
+msgstr "将您的WordPress背景修改为<a href=\"http://www.bing.com/\">必应</a>每日美图"
+
+#. Screenshot description.
+msgid "The final effect of the plugin is on the mobile side."
+msgstr "移动端效果"
+
+#. Screenshot description.
+msgid "The final effect of the plugin is on the pc side."
+msgstr "电脑端效果"
+
+#. Screenshot description.
+msgid "Plugin setting option's location"
+msgstr "插件设置选项的位置"
+
+#. Screenshot description.
+msgid "Plugin setting screen"
+msgstr "插件的设置界面"
+
+#. Found in changelog list item.
+msgid "The first version."
+msgstr "第一个版本。"
+
+#. Found in changelog list item.
+msgid "Fixed that some translations did not display."
+msgstr "修复部分翻译无法正常显示的错误。"
+
+
+#. Found in changelog list item.
+msgid "Fixed that could not change the display value when slide the range on the mobile."
+msgstr "修复在移动端无法实时显示滑块的数值的问题。"
+
+
+#. Found in changelog list item.
+msgid "Fixed that was reported error directly with no message because GD library is not supported."
+msgstr "修复在系统/服务器不支持GD库时，会直接让WordPress报错的错误。"
+
+
+#. Found in changelog list item.
+msgid "Add the Warning that return the error message if the plugin can not service normally."
+msgstr "添加了当插件无法正常运行时，弹出包含出错信息的提示的功能。"
+
+#. Found in changelog list item.
+msgid "Add the function that user-defined the location of the saved directory for the plugin static files."
+msgstr "新增用户可自定义插件静态文件保存的目录位置的功能。"

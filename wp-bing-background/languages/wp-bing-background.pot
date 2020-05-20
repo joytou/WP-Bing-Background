@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"Project-Id-Version: Bing HP Image Archive\n"
+"Project-Id-Version: WP Bing Background\n"
 "POT-Creation-Date: 2020-04-28 17:16+0800\n"
 "PO-Revision-Date: 2020-04-28 17:15+0800\n"
 "Last-Translator: Joytou Wu <joytou.wu@qq.com>\n"
@@ -36,6 +36,18 @@ msgstr ""
 #. Plugin Name of the plugin/theme
 #: wp-bing-background.php:149						
 msgid "WP Bing Background"
+msgstr ""
+
+#: wp-bing-background.php:150
+msgid "Save Directory"
+msgstr ""
+
+#: wp-bing-background.php:151
+msgid ""
+"About the directory name of the static files that are automatically "
+"generated in this plugin to be saved to the upload folder. "
+"For example: The value is 'bing', then the files will be saved "
+"in '/wp-content/uploads/bing/'"
 msgstr ""
 
 #: wp-bing-background.php:152
@@ -168,4 +180,107 @@ msgstr ""
 
 #. Author of the plugin/theme
 msgid "Joytou Wu"
+msgstr ""
+
+#. Short description.
+msgid "Change your wordpress&#039;s background to the image which provided by bing."
+msgstr ""
+
+#. Found in faq list item.
+msgid "If all the above methods cannot solve your problem, please contact me through email &lt;joytou.wu@qq.com &gt; to help you solve the problem in a timely manner."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Please ensure that you do not use any cache, because once you use the cache, what you get will always be the result of the cache unless you clear the cache to ensure that it can get the latest static resource files."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Please check whether the directory 'wp-content -&gt; uploads -&gt; bing' exists, whether there were any files in it, and whether that files can be opened and read normally. If it is broken, please delete it and refresh your website again."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Please try several more times to save the settings of this plugin so that it can regenerate the required static resource files."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Please make sure that the domain name in the 'Interface Domain Name' column is Bing's official domain name. As stated in the description, don't modify it casually unless it doesn't work or it makes you feel unsatisfactory."
+msgstr ""
+
+#. Found in faq header.
+msgid "Why does the background not show the image?"
+msgstr ""
+
+#. Found in faq list item.
+msgid "Please check if your host closed the curl function."
+msgstr ""
+
+#. Found in faq list item.
+msgid "Please check whether your hosts can connect properly and visit other websites."
+msgstr ""
+
+#. Found in faq list item.
+msgid "As I known, some hosts are now blocked by Bing, due to these was(were) attacking on Bing in the past or doing something unfriendly to Bing."
+msgstr ""
+
+#. Found in faq header.
+msgid "Why does it show the error message that 'http_request_failed (cURL error 7: )'"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Use the Settings-&gt;WP Bing Bakground screen to configure the plugin"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Activate the plugin through the 'Plugins' screen in WordPress"
+msgstr ""
+
+#. Found in installation list item.
+msgid "Upload the plugin files to the <code>/wp-content/plugins/wp-bing-background</code> directory, or install the plugin through the WordPress plugins screen directly."
+msgstr ""
+
+#. Found in description paragraph.
+msgid "Change your wordpress's background to the image which provided by <a href=\"http://www.bing.com/\">bing</a>."
+msgstr ""
+
+#. Screenshot description.
+msgid "The final effect of the plugin is on the mobile side."
+msgstr ""
+
+#. Screenshot description.
+msgid "The final effect of the plugin is on the pc side."
+msgstr ""
+
+#. Screenshot description.
+msgid "Plugin setting option's location"
+msgstr ""
+
+#. Screenshot description.
+msgid "Plugin setting screen"
+msgstr ""
+
+#. Found in changelog list item.
+msgid "The first version."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Fixed that some translations did not display."
+msgstr ""
+
+
+#. Found in changelog list item.
+msgid "Fixed that could not change the display value when slide the range on the mobile."
+msgstr ""
+
+
+#. Found in changelog list item.
+msgid "Fixed that was reported error directly with no message because GD library is not supported."
+msgstr ""
+
+
+#. Found in changelog list item.
+msgid "Add the Warning that return the error message if the plugin can not service normally."
+msgstr ""
+
+#. Found in changelog list item.
+msgid "Add the function that user-defined the location of the saved directory for the plugin static files."
 msgstr ""

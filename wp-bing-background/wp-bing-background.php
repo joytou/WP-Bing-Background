@@ -1,12 +1,12 @@
 <?php
 /**
  * @package WP_Bing_Background
- * @version 1.0.0
+ * @version 1.1.4
  */
 /**
  * Plugin Name: WP Bing Background
  * Description: Change the wordpress's background to the image which provided by <a href="https://www.bing.com/">Bing</a>.
- * Version: 1.1.2
+ * Version: 1.1.4
  * Requires at least: 5.0
  * Requires PHP: 5.4
  * Author: Joytou Wu
@@ -63,6 +63,17 @@ class wp_bing_background {
      *  ]
      */
     const OPTIONS_FIELD = [
+    	[
+    		'id' => 'save_directory',
+    		'name' => 'Save Directory',
+    		'default_value' => 'bing',
+    		'type' => 'text',
+    		'desc' => 'About the directory name of the static files that are automatically generated in this plugin to be saved to the upload folder. For example: The value is \'bing\', then the files will be saved in \'/wp-content/uploads/bing/\'',
+    		'required' => true,
+    		'attrs' => [
+    		],
+    	],
+    	
         [
             'id' => 'interface_domain_name',
             'name' => 'Interface Domain Name',
@@ -229,7 +240,7 @@ class wp_bing_background {
         load_plugin_textdomain( 
             'wp-bing-background', 
             false, 
-            dirname( plugin_basename( __FILE__ ) ) . DIRECTORY_SEPARATOR . 'languages' 
+            dirname( plugin_basename( __FILE__ ) ) . '/languages/' 
         );
         
         //存储配置
@@ -244,6 +255,9 @@ class wp_bing_background {
                         $bing_hp_image_archive_plugin_options[$option['id']] = esc_url( $_POST[self::OPTION_NAME][$option['id']] );
                         break;
                         
+                    case 'save_directory':
+                    	$bing_hp_image_archive_plugin_options[$option['id']] = sanitize_file_name( $_POST[self::OPTION_NAME][$option['id']] );
+                        
                     default:
                         $bing_hp_image_archive_plugin_options[$option['id']] = sanitize_text_field( $_POST[self::OPTION_NAME][$option['id']] );
                         break;
@@ -254,6 +268,13 @@ class wp_bing_background {
             update_option( self::OPTION_NAME, $bing_hp_image_archive_plugin_options );
             
             unset( $bing_hp_image_archive_plugin_options );
+            
+            $bingDir = wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . get_option( self::OPTION_NAME )['save_directory'];
+
+			//如果不存在要保存静态资源文件的文件夹，则自动创建
+            if( !is_dir( $bingDir ) ){
+            	mkdir( $bingDir, 0755 );
+            }
             
             if( self::complie_less_to_css() ){
                 self::add_settings_error(
@@ -277,7 +298,7 @@ class wp_bing_background {
         }
         
         //每日更新图片
-        $bingDir = wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . 'bing';
+        $bingDir = wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . get_option( self::OPTION_NAME )['save_directory'];
         $today = md5( mktime( 0, 0, 0, date( 'm' ), date( 'd' ), date( 'Y' ) ) );
         // 是否存在今日图片
         if ( !file_exists( $bingDir . DIRECTORY_SEPARATOR . $today . '.jpg' ) ) {
@@ -367,7 +388,7 @@ class wp_bing_background {
  		);
         $domain = 'https://www.bing.com';
         $response =  wp_remote_get( $domain . '/HPImageArchive.aspx?format=js&cc=zh&idx=0&n=1' );
-        if($response->has_errors()){
+        if( wp_remote_retrieve_response_code($response) !== 200 ){
         	foreach($response->get_error_codes() as $k=>$v){
         		self::add_settings_error(
                 	'myUniqueIdentifyer',
@@ -381,8 +402,7 @@ class wp_bing_background {
             	);
         	}
             return false;
-        }
-        if( wp_remote_retrieve_response_code($response) === 200 ){
+        }else{
             return $domain. json_decode( wp_remote_retrieve_body($response), true )['images'][0]['url'];
         }
     }
@@ -404,7 +424,7 @@ class wp_bing_background {
     static function cache_image(){
         // 获取 wp 路径
         $imgDir = wp_upload_dir();
-        $bingDir = $imgDir['basedir'] . DIRECTORY_SEPARATOR . 'bing' . DIRECTORY_SEPARATOR . 'images';
+        $bingDir = $imgDir['basedir'] . DIRECTORY_SEPARATOR . get_option( self::OPTION_NAME )['save_directory'] . DIRECTORY_SEPARATOR . 'images';
         if ( !file_exists( $bingDir ) ) {
             mkdir( $bingDir, 0755 );
         }
@@ -430,7 +450,7 @@ class wp_bing_background {
             	$content = ( new imgcompress( $source, $precent ) )->compressImg( $distance );
             } else {
             	$response =  wp_remote_get( $source );
-            	if($response->has_errors()){
+            	if(wp_remote_retrieve_response_code($response) !== 200 ){
         			foreach($response->get_error_codes() as $k=>$v){
         				self::add_settings_error(
                 			'myUniqueIdentifyer',
@@ -444,15 +464,14 @@ class wp_bing_background {
             			);
         			}
             		return false;
-        		}
-        		if( wp_remote_retrieve_response_code($response) === 200 ) {
+        		}else{
             		$file_distance = fopen( $distance, 'w' );
         			fwrite( $file_distance, wp_remote_retrieve_body ( $response ) );
         			fclose( $file_distance );
         		}
             }
         }
-        $src = $imgDir['baseurl'] . '/bing/images/' . $today . '.jpg';
+        $src = $imgDir['baseurl'] . '/' . get_option( self::OPTION_NAME )['save_directory'] . '/images/' . $today . '.jpg';
         return $src;//此处返回url地址，$src不能把'/'更改为DIRECTORY_SEPARATOR
     } 
     
@@ -493,7 +512,7 @@ class wp_bing_background {
         $lessc = new lessc();
         $lessc->setVariables( $less );
         
-        $bingDir = wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . 'bing' . DIRECTORY_SEPARATOR . 'css';
+        $bingDir = wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . get_option( self::OPTION_NAME )['save_directory'] . DIRECTORY_SEPARATOR . 'css';
         
         $inputFile = plugin_dir_path( __FILE__ ) . 'css' . DIRECTORY_SEPARATOR . 'style.less';
         $outputFile = $bingDir . DIRECTORY_SEPARATOR .'style.css';
@@ -528,7 +547,7 @@ class wp_bing_background {
                     $inputFile 
                 ),
                 'error'
-                );
+            );
         }
         
         while( !feof( $style_less_file ) ){
@@ -552,7 +571,7 @@ class wp_bing_background {
      */
     static function load_css(){
         //此处为加载css文件，不能把'/'改为DIRECTORY_SEPARATOR，下同
-        wp_enqueue_style( 'wp-bing-background-style', wp_upload_dir()['baseurl'] . '/' . 'bing' . '/' . 'css' . '/' . 'style.css' );
+        wp_enqueue_style( 'wp-bing-background-style', wp_upload_dir()['baseurl'] . '/' . get_option( self::OPTION_NAME )['save_directory'] . '/' . 'css' . '/' . 'style.css' );
     }
     
     /**
@@ -589,7 +608,7 @@ class wp_bing_background {
      */
     static function render_setting_page(){
     	?>
-    	<h2><?php esc_html_e( 'WP Bing Background', 'wp-bing-background' );?></h2>
+    	<h2><?php esc_html_e( 'WP Bing Background', 'wp-bing-background' );?></h2>
     	<form method="post">
     		<?php
                 settings_fields(self::OPTION_NAME);
@@ -690,7 +709,7 @@ class wp_bing_background {
     	 * 只用一个echo进行输出的实际效果：{$desc}<p class="description" id="{$id}-description"></p>
     	 */
     	echo "<p class=\"description\" id=\"" . esc_attr( $args['id'] ) . "-description\">";
-    	echo ( $args['desc'] ? esc_html_e( $args['desc'], 'wp-bing-background' ) : '' );
+    	echo ( $args['desc'] ? esc_html__( $args['desc'], 'wp-bing-background' ) : '' );
     	echo "</p>";
     }
     
