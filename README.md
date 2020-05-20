@@ -37,6 +37,14 @@ In directory: <a href="./wp-bing-background/">wp-bing-background</a> -> <a href=
 
 ## Changelog 
 
+### 1.1.4
+
+* Fixed that some translations did not display.
+* Fixed that could not change the display value when slide the range on the mobile.
+* Fixed that was reported error directly with no message because GD library is not supported.
+* Add the function that user-defined the location of the saved directory for the plugin static files.
+* Add the Warning that return the error message if the plugin can not service normally.
+
 ### 1.0.0
 
 * The first version.
